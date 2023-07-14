@@ -1,0 +1,26 @@
+vector<vector<int> > fourSum(vector<int> &arr, int k) {
+    int n=arr.size();
+    sort(arr.begin(),arr.end());
+    set<vector<int>>st;
+    for(int i=0;i<n-3;i++){
+        for(int j=i+1;j<n-2;j++){
+            int net=k-arr[i]-arr[j];
+            int x=j+1,y=n-1;
+            while(x<y){
+                if(arr[x]+arr[y]==net){
+                    st.insert({arr[i],arr[j],arr[x],arr[y]});
+                    x++;
+                    y--;
+                }
+                else if(arr[x]+arr[y]>net){
+                    y--;
+                }
+                else{
+                    x++;
+                }
+            }
+        }
+    }
+    vector<vector<int>>v(st.begin(),st.end());
+    return v;
+}
