@@ -1,0 +1,19 @@
+long long countTriplets(long long arr[], int n, long long sum){
+    long long count=0;
+    sort(arr,arr+n);
+    for(int i=0;i<n-2;i++){
+        long long temp=sum-arr[i];
+        int x=i+1,y=n-1;
+        while(x<=y){
+            if(arr[x]+arr[y]<temp){
+                count=count+y-x;
+                x++;
+                
+            }
+            else{
+                y--;
+            }
+        }
+    }
+    return count;
+}
