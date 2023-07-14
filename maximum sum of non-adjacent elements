@@ -1,0 +1,26 @@
+int solve(int arr[],int n,int index,vector<int>&dp){                                        //memoized
+    if(index==0)return arr[0];
+    if(index<0)return 0;
+    if(dp[index]!=-1)return dp[index];
+    return dp[index]=max(arr[index]+solve(arr,n,index-2,dp),solve(arr,n,index-1,dp));
+}
+int FindMaxSum(int arr[], int n)
+{
+    vector<int>dp(n,-1);
+    return solve(arr,n,n-1,dp);
+}
+
+int FindMaxSum(int arr[], int n)                                                            //bottom-up
+{
+    vector<int>dp(n,-1);
+    dp[0]=arr[0];
+    for(int i=1;i<n;i++){
+        int pick=arr[i];
+        if(i>1){
+            pick+=dp[i-2];
+        }
+        int notpick=dp[i-1];
+        dp[i]=max(pick,notpick);
+    }
+    return dp[n-1];
+}
